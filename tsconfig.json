@@ -1,4 +1,6 @@
 {
+  "include": ["assets/js/**/*"],
+  "exclude": ["functions/**/*", "node_modules", "dist", "test", "**/*.test.ts"],
   "compilerOptions": {
     "strict": true,
     "moduleResolution": "node"

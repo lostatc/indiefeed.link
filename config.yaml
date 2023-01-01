@@ -3,6 +3,9 @@ languageCode: "en-us"
 title: "IndieFeed"
 enableRobotsTXT: true
 disableAliases: true
+disableKinds:
+  - taxonomy
+  - term
 
 imaging:
   quality: 100

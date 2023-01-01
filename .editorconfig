@@ -21,6 +21,9 @@ indent_size = 2
 [*.{js,jsx,ts,tsx}]
 indent_size = 2
 
+[*.html]
+indent_size = 2
+
 [*.xsl]
 indent_size = 2
 

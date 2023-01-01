@@ -13,6 +13,12 @@
   },
   "homepage": "https://github.com/lostatc/indiefeed.link#readme",
   "devDependencies": {
-    "prettier": "^2.8.1"
+    "@cloudflare/workers-types": "^4.20221111.1",
+    "@types/content-type": "^1.1.5",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "content-type": "^1.0.4"
   }
 }
