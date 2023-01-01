@@ -21,5 +21,8 @@ indent_size = 2
 [*.{js,jsx,ts,tsx}]
 indent_size = 2
 
+[*.xsl]
+indent_size = 2
+
 [*.md]
 max_line_length = 80
