@@ -1,0 +1,6 @@
+User-Agent: *
+{{ if hugo.IsProduction -}}
+Allow: /
+{{ else -}}
+Disallow: /
+{{ end -}}
