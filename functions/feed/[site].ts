@@ -2,6 +2,12 @@ import * as ContentType from "content-type";
 
 interface Env {}
 
+const Header = {
+  ContentType: "Content-Type",
+  CacheControl: "Cache-Control",
+  Allow: "Allow",
+} as const;
+
 const getUrlFromString = (url: string): URL | null => {
   try {
     return new URL(url);
@@ -35,6 +41,15 @@ const feedKindFromMediaType = (mediaType: string): FeedKind | null => {
   if (rssMediaTypes.includes(mediaType)) return "rss";
 
   return null;
+};
+
+const mediaTypeFromFeedKind = (kind: FeedKind): string => {
+  switch (kind) {
+    case "atom":
+      return "application/atom+xml";
+    case "rss":
+      return "application/rss+xml";
+  }
 };
 
 const sortedByKeyPrecedence = <T, U extends string | number>(
@@ -110,8 +125,9 @@ const extractFeedUrlFromDom = async (response: Response): Promise<OriginFeed | n
 };
 
 const getFeedUrl = async (originUrl: URL): Promise<OriginFeed | null> => {
-  const originPageResponse = await fetch(originUrl, { method: "GET" });
-  const originPageContentType = originPageResponse.headers.get("Content-Type");
+  console.log(originUrl);
+  const originPageResponse = await fetch(originUrl.toString(), { method: "GET" });
+  const originPageContentType = originPageResponse.headers.get(Header.ContentType);
 
   if (originPageContentType === null) return null;
 
@@ -127,13 +143,53 @@ const getFeedUrl = async (originUrl: URL): Promise<OriginFeed | null> => {
   return await extractFeedUrlFromDom(originPageResponse);
 };
 
-const injectXslStyleSheet = (feed: OriginFeed): Response => {
+const xslPath = (kind: FeedKind): string => {
+  switch (kind) {
+    case "atom":
+      return "/xsl/atom.xsl";
+    case "rss":
+      return "/xsl/rss.xsl";
+  }
+};
+
+const respondWithFeedPage = async (feed: OriginFeed): Promise<Response> => {
   // TODO: Request the syndication feed from the origin URL and inject the `<?xml-stylesheet?>`
   // directive.
-  return new Response();
+  const { readable, writable } = new TransformStream();
+
+  let writer = writable.getWriter();
+  writer.write(`<?xml-stylesheet type="text/xsl" href="${xslPath(feed.kind)}" media="screen"?>\n`);
+  await writer.close();
+
+  const originFeedRequest = await fetch(feed.url.toString(), { method: "GET" });
+  const originFeedBody = originFeedRequest.body;
+
+  if (originFeedBody === null) {
+    // TODO: Handle this gracefully with a nice error page.
+    throw new Error(`There is no syndication feed at this URL: ${feed.url}`);
+  }
+
+  originFeedBody.pipeTo(writable);
+
+  return new Response(readable, {
+    headers: {
+      [Header.ContentType]: mediaTypeFromFeedKind(feed.kind),
+      [Header.CacheControl]: "no-cache",
+    },
+  });
 };
 
 export const onRequest: PagesFunction<Env> = async (context) => {
+  if (context.request.method !== "HEAD" && context.request.method != "GET") {
+    return new Response(undefined, {
+      status: 405,
+      headers: {
+        [Header.Allow]: "HEAD, GET",
+        [Header.CacheControl]: "no-cache",
+      },
+    });
+  }
+
   if (Array.isArray(context.params.site)) {
     throw new Error("Expecting a single path param.");
   }
@@ -152,5 +208,5 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     throw new Error(`There is no syndication feed at this URL: ${context.params.site}`);
   }
 
-  return injectXslStyleSheet(originFeedUrl);
+  return respondWithFeedPage(originFeedUrl);
 };
