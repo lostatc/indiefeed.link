@@ -11,5 +11,8 @@
   "bugs": {
     "url": "https://github.com/lostatc/indiefeed.link/issues"
   },
-  "homepage": "https://github.com/lostatc/indiefeed.link#readme"
+  "homepage": "https://github.com/lostatc/indiefeed.link#readme",
+  "devDependencies": {
+    "prettier": "^2.8.1"
+  }
 }
