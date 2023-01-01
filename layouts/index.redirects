@@ -1,0 +1,15 @@
+{{- range $page := .Site.Pages -}}
+{{- range $alias := $page.Aliases -}}
+{{- $absAlias := $alias -}}
+{{- if not (hasPrefix $absAlias "/") -}}
+  {{- $absAlias = path.Join (path.Clean $page.RelPermalink | path.Dir) $absAlias -}}
+{{- end -}}
+{{- $absAlias | path.Clean }} {{ $page.RelPermalink }} 301
+{{ $absAlias | path.Clean | printf "%s/" }} {{ $page.RelPermalink }} 301
+{{ end -}}
+{{- end -}}
+
+{{- range .Site.Params.redirects -}}
+{{ .from | path.Clean }} {{ .to }} {{ .status }}
+{{ .from | path.Clean | printf "%s/" }} {{ .to }} {{ .status }}
+{{ end -}}
