@@ -1,9 +1,0 @@
-/node_modules/
-/resources/
-/public/
-jsconfig.json
-hugo_stats.json
-/.hugo_build.lock
-
-# This file is for local testing.
-/static/feed.xml
