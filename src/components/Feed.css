@@ -1,0 +1,7 @@
+.Feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-sep);
+  align-items: center;
+  padding: 4rem;
+}

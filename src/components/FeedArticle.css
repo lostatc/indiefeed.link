@@ -1,0 +1,29 @@
+.FeedArticle {
+  background-color: var(--card-bg);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow);
+  max-width: 60rem;
+  width: 100%;
+  padding: var(--card-padding);
+}
+
+.FeedArticle .article-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.FeedArticle h2 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.FeedArticle h2 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.FeedArticle h3 {
+  margin: 0;
+  font-weight: 300;
+}
