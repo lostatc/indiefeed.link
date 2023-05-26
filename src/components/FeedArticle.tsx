@@ -1,5 +1,5 @@
 import "./FeedArticle.css";
-import { BsCalendar2, BsClock, BsPersonCircle } from "react-icons/bs";
+import { BsCalendar2, BsPersonCircle } from "react-icons/bs";
 
 export interface FeedArticleProps {
   url: URL;
@@ -7,7 +7,6 @@ export interface FeedArticleProps {
   subtitle: string;
   categories: ReadonlyArray<string>;
   date: Date;
-  readTimeMinutes: number;
   authorName: string;
 }
 
@@ -23,7 +22,6 @@ export const FeedArticle = ({
   subtitle,
   categories,
   date,
-  readTimeMinutes,
   authorName,
 }: FeedArticleProps) => {
   return (
@@ -43,12 +41,6 @@ export const FeedArticle = ({
             <BsCalendar2 />
             <time className="article-detail-text" dateTime={date.toISOString()}>
               {new Intl.DateTimeFormat(undefined, dateFormatOptions).format(date)}
-            </time>
-          </div>
-          <div className="article-detail">
-            <BsClock />
-            <time className="article-detail-text" dateTime={`PT0H${readTimeMinutes}M`}>
-              {readTimeMinutes} minute read
             </time>
           </div>
           <div className="article-detail">

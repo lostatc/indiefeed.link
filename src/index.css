@@ -1,8 +1,18 @@
 body {
+  /*
+   * Breakpoints:
+   * - xs: 0
+   * - sm: 576px
+   * - md: 768px
+   * - lg: 992px
+   * - xl: 1200px
+   * - xxl: 1400px
+   */
+
   --color-bg: #f5f5fa;
   --color-bg-dark: #303030;
-  --color-accent: #ffcb62;
-  --color-accent-dark: var(--color-accent);
+  --color-accent: #ffdc95;
+  --color-accent-dark: #ffcb62;
   --color-text-primary: rgba(0, 0, 0, 0.9);
   --color-text-primary-dark: rgba(255, 255, 255, 0.9);
   --color-text-secondary: rgba(0, 0, 0, 0.7);
@@ -16,8 +26,11 @@ body {
   --font-weight-black: 900;
 
   --font-size-small: 0.8rem;
+  --font-size-regular: 1rem;
+  --font-size-title: 1.4rem;
 
-  --section-sep: 40px;
+  --gap-small: 8px;
+  --gap-medium: 16px;
 
   --card-color-bg: #fff;
   --card-color-bg-dark: #424242;
@@ -25,13 +38,16 @@ body {
   --card-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06),
     0px 0px 1px rgba(0, 0, 0, 0.04);
   --card-padding: 30px;
+  --card-padding-tight: 22px;
+  --card-gap: 38px;
+  --card-gap-tight: 26px;
 
-  --tag-color-fg: var(--color-text-primary-dark);
+  --tag-color-fg: var(--color-text-primary);
   --tag-color-fg-dark: var(--color-text-primary);
   --tag-color-bg: var(--color-accent);
   --tag-color-bg-dark: var(--color-accent);
   --tag-border-radius: 4px;
-  --tag-gap: 16px;
+  --tag-gap: var(--gap-medium);
 }
 
 @font-face {

@@ -1,7 +1,20 @@
 .Feed {
   display: flex;
   flex-direction: column;
-  gap: var(--section-sep);
+  gap: var(--card-gap);
   align-items: center;
   padding: 4rem;
+}
+
+@media (max-width: 768px) {
+  .Feed {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .Feed {
+    padding: 1rem;
+    gap: var(--card-gap-tight);
+  }
 }
