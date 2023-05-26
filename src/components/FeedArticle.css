@@ -4,7 +4,7 @@
 }
 
 .article-body {
-  background-color: var(--card-bg);
+  background-color: var(--card-color-bg);
   border-radius: var(--card-border-radius);
   box-shadow: var(--card-box-shadow);
   padding: var(--card-padding);
@@ -37,18 +37,36 @@ a.article-body {
 .article-body .article-subtitle {
   margin: 0;
   font-weight: 300;
+  color: var(--color-text-secondary);
 }
 
 .article-body .article-category-list {
   display: flex;
-  gap: 10px;
+  gap: var(--tag-gap);
 }
 
 .article-body .article-category {
   border-radius: var(--tag-border-radius);
-  color: var(--tag-fg);
-  background-color: var(--tag-bg);
+  color: var(--tag-color-fg);
+  background-color: var(--tag-color-bg);
   padding: 8px 16px;
   font-size: var(--font-small);
   display: inline-block;
+}
+
+.article-body .article-detail-list {
+  display: flex;
+  align-items: center;
+  gap: var(--tag-gap);
+  color: var(--color-text-tertiary);
+}
+
+.article-body .article-detail {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.article-body .article-detail .article-detail-text {
+  font-size: var(--font-small);
 }
