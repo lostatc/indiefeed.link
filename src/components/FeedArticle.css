@@ -75,7 +75,7 @@ ul.article-category-list {
 
 .article-category {
   border-radius: var(--tag-border-radius);
-  padding: 8px 16px;
+  padding: 6px 14px;
   font-size: var(--font-size-small);
   display: inline-block;
 }
