@@ -27,10 +27,12 @@ export const FeedArticle = ({
   return (
     <article className="FeedArticle">
       <a className="article-body" href={url.toString()}>
-        <header className="article-category-list">
-          {categories.map((categoryLabel) => (
-            <span className="article-category">{categoryLabel}</span>
-          ))}
+        <header>
+          <ul className="article-category-list">
+            {categories.map((categoryLabel) => (
+              <li className="article-category">{categoryLabel}</li>
+            ))}
+          </ul>
         </header>
         <div className="article-title-wrapper">
           <h2 className="article-title">{title}</h2>
@@ -38,13 +40,13 @@ export const FeedArticle = ({
         </div>
         <footer className="article-detail-list">
           <div className="article-detail">
-            <BsCalendar2 />
+            <BsCalendar2 title="Date" />
             <time className="article-detail-text" dateTime={date.toISOString()}>
               {new Intl.DateTimeFormat(undefined, dateFormatOptions).format(date)}
             </time>
           </div>
           <div className="article-detail">
-            <BsPersonCircle />
+            <BsPersonCircle title="Author" />
             <span className="article-detail-text">{authorName}</span>
           </div>
         </footer>
