@@ -9,13 +9,15 @@ function App() {
         <Feed>
           <FeedArticle
             url={new URL("https://example.com")}
-            title="Article Title"
-            subtitle="This is the article subtitle."
+            title="Starship Explodes Again"
+            subtitle={'"This was the best possible outcome," says Musk.'}
+            categories={["News", "Tech"]}
           ></FeedArticle>
           <FeedArticle
             url={new URL("https://example.com")}
-            title="Article Title"
-            subtitle="This is the article subtitle."
+            title="Literal Bull Loose in New York Stock Exchange"
+            subtitle="The SEC is responding to reports of a bull market."
+            categories={["Finance"]}
           ></FeedArticle>
         </Feed>
       </main>

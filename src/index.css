@@ -1,5 +1,10 @@
 body {
   --bg: #f5f5fa;
+  --accent: #ffcb62;
+
+  --font-small: 0.8rem;
+
+  --section-sep: 40px;
 
   --card-bg: #fff;
   --card-border-radius: 10px;
@@ -7,7 +12,9 @@ body {
     0px 0px 1px rgba(0, 0, 0, 0.04);
   --card-padding: 30px;
 
-  --section-sep: 40px;
+  --tag-bg: var(--accent);
+  --tag-fg: #fff;
+  --tag-border-radius: 4px;
 }
 
 @font-face {
