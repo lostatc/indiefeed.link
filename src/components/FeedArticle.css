@@ -31,83 +31,83 @@ a.article-body {
   color: inherit;
 }
 
-.article-body .article-title-wrapper {
+.article-title-wrapper {
   display: flex;
   flex-direction: column;
   gap: var(--gap-small);
 }
 
-.article-body .article-title {
+.article-title {
   margin: 0;
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-title);
 }
 
-[data-scheme="light"] .article-body .article-title {
+[data-scheme="light"] .article-title {
   color: var(--color-text-primary);
 }
 
-[data-scheme="dark"] .article-body .article-title {
+[data-scheme="dark"] .article-title {
   color: var(--color-text-primary-dark);
 }
 
-.article-body .article-subtitle {
+.article-subtitle {
   margin: 0;
   font-weight: var(--font-weight-light);
   font-size: var(--font-size-regular);
 }
 
-[data-scheme="light"] .article-body .article-subtitle {
+[data-scheme="light"] .article-subtitle {
   color: var(--color-text-secondary);
 }
 
-[data-scheme="dark"] .article-body .article-subtitle {
+[data-scheme="dark"] .article-subtitle {
   color: var(--color-text-secondary-dark);
 }
 
-.article-body .article-category-list {
+.article-category-list {
   display: flex;
   gap: var(--tag-gap);
 }
 
-.article-body .article-category {
+.article-category {
   border-radius: var(--tag-border-radius);
   padding: 8px 16px;
   font-size: var(--font-size-small);
   display: inline-block;
 }
 
-[data-scheme="light"] .article-body .article-category {
+[data-scheme="light"] .article-category {
   color: var(--tag-color-fg);
   background-color: var(--tag-color-bg);
 }
 
-[data-scheme="dark"] .article-body .article-category {
+[data-scheme="dark"] .article-category {
   color: var(--tag-color-fg-dark);
   background-color: var(--tag-color-bg-dark);
 }
 
-.article-body .article-detail-list {
+.article-detail-list {
   display: flex;
   align-items: center;
   gap: var(--gap-medium);
   flex-wrap: wrap;
 }
 
-[data-scheme="light"] .article-body .article-detail-list {
+[data-scheme="light"] .article-detail-list {
   color: var(--color-text-tertiary);
 }
 
-[data-scheme="dark"] .article-body .article-detail-list {
+[data-scheme="dark"] .article-detail-list {
   color: var(--color-text-tertiary-dark);
 }
 
-.article-body .article-detail {
+.article-detail {
   display: flex;
   align-items: center;
   gap: var(--gap-small);
 }
 
-.article-body .article-detail .article-detail-text {
+.article-detail .article-detail-text {
   font-size: var(--font-size-small);
 }
