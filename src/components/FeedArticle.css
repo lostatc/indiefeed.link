@@ -3,8 +3,15 @@
   width: 100%;
 }
 
-.article-body {
+[data-scheme="light"] .article-body {
   background-color: var(--card-color-bg);
+}
+
+[data-scheme="dark"] .article-body {
+  background-color: var(--card-color-bg-dark);
+}
+
+.article-body {
   border-radius: var(--card-border-radius);
   box-shadow: var(--card-box-shadow);
   padding: var(--card-padding);
@@ -24,20 +31,30 @@ a.article-body {
   gap: 8px;
 }
 
-.article-body .article-title a {
-  text-decoration: none;
-  color: inherit;
-}
-
 .article-body .article-title {
   margin: 0;
-  font-weight: 700;
+  font-weight: var(--font-weight-bold);
+}
+
+[data-scheme="light"] .article-body .article-title {
+  color: var(--color-text-primary);
+}
+
+[data-scheme="dark"] .article-body .article-title {
+  color: var(--color-text-primary-dark);
 }
 
 .article-body .article-subtitle {
   margin: 0;
-  font-weight: 300;
+  font-weight: var(--font-weight-light);
+}
+
+[data-scheme="light"] .article-body .article-subtitle {
   color: var(--color-text-secondary);
+}
+
+[data-scheme="dark"] .article-body .article-subtitle {
+  color: var(--color-text-secondary-dark);
 }
 
 .article-body .article-category-list {
@@ -47,18 +64,33 @@ a.article-body {
 
 .article-body .article-category {
   border-radius: var(--tag-border-radius);
+  padding: 8px 16px;
+  font-size: var(--font-size-small);
+  display: inline-block;
+}
+
+[data-scheme="light"] .article-body .article-category {
   color: var(--tag-color-fg);
   background-color: var(--tag-color-bg);
-  padding: 8px 16px;
-  font-size: var(--font-small);
-  display: inline-block;
+}
+
+[data-scheme="dark"] .article-body .article-category {
+  color: var(--tag-color-fg-dark);
+  background-color: var(--tag-color-bg-dark);
 }
 
 .article-body .article-detail-list {
   display: flex;
   align-items: center;
   gap: var(--tag-gap);
+}
+
+[data-scheme="light"] .article-body .article-detail-list {
   color: var(--color-text-tertiary);
+}
+
+[data-scheme="dark"] .article-body .article-detail-list {
+  color: var(--color-text-tertiary-dark);
 }
 
 .article-body .article-detail {
@@ -68,5 +100,5 @@ a.article-body {
 }
 
 .article-body .article-detail .article-detail-text {
-  font-size: var(--font-small);
+  font-size: var(--font-size-small);
 }

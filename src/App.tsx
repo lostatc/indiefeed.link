@@ -10,7 +10,7 @@ function App() {
           <FeedArticle
             url={new URL("https://example.com")}
             title="Starship Explodes Again"
-            subtitle={'"This was the best possible outcome," says Musk.'}
+            subtitle={'"This was the best possible outcome," says Musk. The FAA disagrees.'}
             categories={["News", "Tech"]}
             date={new Date("2023-04-30T13:05:00Z")}
             readTimeMinutes={11}

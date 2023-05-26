@@ -1,21 +1,35 @@
 body {
   --color-bg: #f5f5fa;
+  --color-bg-dark: #303030;
   --color-accent: #ffcb62;
-  --color-text-secondary: #676767;
-  --color-text-tertiary: #a0a0a0;
+  --color-accent-dark: var(--color-accent);
+  --color-text-primary: rgba(0, 0, 0, 0.9);
+  --color-text-primary-dark: rgba(255, 255, 255, 0.9);
+  --color-text-secondary: rgba(0, 0, 0, 0.7);
+  --color-text-secondary-dark: rgba(255, 255, 255, 0.7);
+  --color-text-tertiary: rgba(0, 0, 0, 0.5);
+  --color-text-tertiary-dark: rgba(255, 255, 255, 0.5);
 
-  --font-small: 0.8rem;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  --font-size-small: 0.8rem;
 
   --section-sep: 40px;
 
   --card-color-bg: #fff;
+  --card-color-bg-dark: #424242;
   --card-border-radius: 10px;
   --card-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06),
     0px 0px 1px rgba(0, 0, 0, 0.04);
   --card-padding: 30px;
 
+  --tag-color-fg: var(--color-text-primary-dark);
+  --tag-color-fg-dark: var(--color-text-primary);
   --tag-color-bg: var(--color-accent);
-  --tag-color-fg: #fff;
+  --tag-color-bg-dark: var(--color-accent);
   --tag-border-radius: 4px;
   --tag-gap: 16px;
 }
@@ -61,7 +75,14 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+[data-scheme="light"] body {
   background-color: var(--color-bg);
+}
+
+[data-scheme="dark"] body {
+  background-color: var(--color-bg-dark);
 }
 
 code {
