@@ -4,10 +4,10 @@ import { BsCalendar2, BsPersonCircle } from "react-icons/bs";
 export interface FeedArticleProps {
   url: URL;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   categories: ReadonlyArray<string>;
   date: Date;
-  authorName: string;
+  authorName?: string;
 }
 
 const dateFormatOptions = {
@@ -27,16 +27,18 @@ export const FeedArticle = ({
   return (
     <article className="FeedArticle">
       <a className="article-body" href={url.toString()}>
-        <header>
-          <ul className="article-category-list">
-            {categories.map((categoryLabel) => (
-              <li className="article-category">{categoryLabel}</li>
-            ))}
-          </ul>
-        </header>
+        {categories.length > 0 && (
+          <header>
+            <ul className="article-category-list">
+              {categories.map((categoryLabel) => (
+                <li className="article-category">{categoryLabel}</li>
+              ))}
+            </ul>
+          </header>
+        )}
         <div className="article-title-wrapper">
           <h2 className="article-title">{title}</h2>
-          <h3 className="article-subtitle">{subtitle}</h3>
+          {subtitle && <h3 className="article-subtitle">{subtitle}</h3>}
         </div>
         <footer className="article-detail-list">
           <div className="article-detail">
@@ -45,10 +47,12 @@ export const FeedArticle = ({
               {new Intl.DateTimeFormat(undefined, dateFormatOptions).format(date)}
             </time>
           </div>
-          <div className="article-detail">
-            <BsPersonCircle title="Author" />
-            <span className="article-detail-text">{authorName}</span>
-          </div>
+          {authorName && (
+            <div className="article-detail">
+              <BsPersonCircle title="Author" />
+              <span className="article-detail-text">{authorName}</span>
+            </div>
+          )}
         </footer>
       </a>
     </article>
