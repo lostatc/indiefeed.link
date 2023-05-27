@@ -1,0 +1,8 @@
+name = "indiefeed-fetcher"
+main = "./src/index.ts"
+compatibility_date = "2023-05-26"
+usage_model = "bundled"
+
+[route]
+pattern = "feed.indiefeed.link"
+custom_domain = true
