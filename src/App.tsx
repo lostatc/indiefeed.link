@@ -1,11 +1,11 @@
 import "./App.css";
-import { AtomFeed } from "./components/AtomFeed";
+import { SyndicationFeed } from "./components/SyndicationFeed";
 
 function App() {
   return (
     <div className="App">
       <main>
-        <AtomFeed url="" />
+        <SyndicationFeed url="" />
       </main>
     </div>
   );

@@ -2,11 +2,11 @@ import "./FeedArticle.css";
 import { BsCalendar2, BsPersonCircle } from "react-icons/bs";
 
 export interface FeedArticleProps {
-  url: string;
-  title: string;
+  url?: string;
+  title?: string;
   subtitle?: string;
   categories: ReadonlyArray<string>;
-  date: Date;
+  date?: Date;
   authorName?: string;
 }
 
@@ -37,16 +37,18 @@ export const FeedArticle = ({
           </header>
         )}
         <div className="article-title-wrapper">
-          <h2 className="article-title">{title}</h2>
+          {title && <h2 className="article-title">{title}</h2>}
           {subtitle && <h3 className="article-subtitle">{subtitle}</h3>}
         </div>
         <footer className="article-detail-list">
-          <div className="article-detail">
-            <BsCalendar2 title="Date" />
-            <time className="article-detail-text" dateTime={date.toISOString()}>
-              {new Intl.DateTimeFormat(undefined, dateFormatOptions).format(date)}
-            </time>
-          </div>
+          {date && (
+            <div className="article-detail">
+              <BsCalendar2 title="Date" />
+              <time className="article-detail-text" dateTime={date.toISOString()}>
+                {new Intl.DateTimeFormat(undefined, dateFormatOptions).format(date)}
+              </time>
+            </div>
+          )}
           {authorName && (
             <div className="article-detail">
               <BsPersonCircle title="Author" />
