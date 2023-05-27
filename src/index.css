@@ -27,7 +27,7 @@ body {
 
   --font-size-small: 0.8rem;
   --font-size-regular: 1rem;
-  --font-size-title: 1.4rem;
+  --font-size-title: 1.3rem;
 
   --gap-small: 8px;
   --gap-medium: 16px;
@@ -39,7 +39,7 @@ body {
     0px 0px 1px rgba(0, 0, 0, 0.04);
   --card-padding: 30px;
   --card-padding-tight: 22px;
-  --card-gap: 38px;
+  --card-gap: 34px;
   --card-gap-tight: 26px;
 
   --tag-color-fg: var(--color-text-primary);
