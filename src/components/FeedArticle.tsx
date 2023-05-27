@@ -2,7 +2,7 @@ import "./FeedArticle.css";
 import { BsCalendar2, BsPersonCircle } from "react-icons/bs";
 
 export interface FeedArticleProps {
-  url: URL;
+  url: string;
   title: string;
   subtitle?: string;
   categories: ReadonlyArray<string>;
@@ -26,7 +26,7 @@ export const FeedArticle = ({
 }: FeedArticleProps) => {
   return (
     <article className="FeedArticle">
-      <a className="article-body" href={url.toString()}>
+      <a className="article-body" href={url}>
         {categories.length > 0 && (
           <header>
             <ul className="article-category-list">

@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import contentType from "content-type";
+import { FeedArticle, FeedArticleProps } from "./FeedArticle";
+import { Feed } from "./Feed";
 
 const ContentType = {
   Atom: "application/atom+xml",
@@ -19,16 +21,13 @@ const isAtomFeed = (res: Response): boolean => hasOneOfContentTypes(res, [Conten
 
 const isHtmlPage = (res: Response): boolean => hasOneOfContentTypes(res, [ContentType.Html]);
 
-const getAtomFeedUrlFromDocument = (doc: Document): URL | undefined => {
+const getAtomFeedUrlFromDocument = (doc: Document): string | undefined => {
   const feedLinkElement = doc.querySelector(
     `html > head > link[rel="alternate"][type="${ContentType.Atom}"]`
   );
   if (feedLinkElement === null) return undefined;
 
-  const feedUrl = feedLinkElement.getAttribute("href");
-  if (feedUrl === null) return undefined;
-
-  return new URL(feedUrl);
+  return feedLinkElement.getAttribute("href") ?? undefined;
 };
 
 const getAtomFeed = async (res: Response): Promise<XMLDocument | undefined> => {
@@ -45,12 +44,50 @@ const getAtomFeed = async (res: Response): Promise<XMLDocument | undefined> => {
   return new DOMParser().parseFromString(await atomFeedRes.text(), ContentType.Xml);
 };
 
-export const AtomFeed = ({ url }: { url: URL }) => {
+const parseAtomFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleProps> => {
+  // The author to use if individual entries don't have authors.
+  const fallbackAuthor = doc.querySelector("feed > author > name")?.textContent ?? undefined;
+
+  // The URL to use if individual entries (for some reason) don't have URLs.
+  const fallbackUrl =
+    doc.querySelector(`feed > link[rel="alternate"][type="text/html"]`)?.getAttribute("href") ??
+    undefined;
+
+  const entries = doc.querySelectorAll("feed > entry");
+
+  return Array.from(entries).map((entry) => ({
+    url:
+      entry.querySelector(`link[rel="alternate"][type="text/html"]`)?.getAttribute("href") ??
+      fallbackUrl ??
+      "",
+    title: entry.querySelector("title")?.textContent ?? "",
+    subtitle: entry.querySelector("summary")?.textContent ?? undefined,
+    categories: Array.from(entry.querySelectorAll("category")).map(
+      (category) => category.getAttribute("label") ?? category.getAttribute("term") ?? ""
+    ),
+    date: new Date(
+      entry.querySelector("published")?.textContent ??
+        entry.querySelector("updated")?.textContent ??
+        ""
+    ),
+    authorName: entry.querySelector("author > name")?.textContent ?? fallbackAuthor,
+  }));
+};
+
+export const AtomFeed = ({ url }: { url: string }) => {
   const [atomFeedDoc, setAtomFeedDoc] = useState<XMLDocument>();
+  const [atomFeed, setAtomFeed] = useState<ReadonlyArray<FeedArticleProps>>();
 
   useEffect(() => {
     fetch(url)
       .then((res) => getAtomFeed(res))
       .then((atomFeed) => setAtomFeedDoc(atomFeed));
   }, [url]);
+
+  useMemo(() => {
+    if (atomFeedDoc === undefined) return;
+    setAtomFeed(parseAtomFeed(atomFeedDoc));
+  }, [atomFeedDoc]);
+
+  return <Feed>{atomFeed?.map((articleProps) => FeedArticle(articleProps)) ?? []}</Feed>;
 };
