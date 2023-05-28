@@ -74,10 +74,12 @@ interface FeedUrl {
 }
 
 class FeedLinkParser {
+  baseUrl: URL;
   feedKinds: ReadonlyArray<FeedKind>;
   feedUrl: FeedUrl | undefined;
 
-  constructor(feedKinds: ReadonlyArray<FeedKind>) {
+  constructor(baseUrl: URL, feedKinds: ReadonlyArray<FeedKind>) {
+    this.baseUrl = baseUrl;
     this.feedKinds = feedKinds;
     this.feedUrl = undefined;
   }
@@ -98,9 +100,16 @@ class FeedLinkParser {
       if (acceptableFeedContentTypes(feedKind).includes(typeAttr)) {
         console.log(`Found ${feedKind} feed: ${hrefAttr}`);
 
+        let absoluteUrl = hrefAttr;
+
+        // Handle the case where the href is a relative URL.
+        if (hrefAttr.startsWith("/")) {
+          absoluteUrl = this.baseUrl.origin + hrefAttr;
+        }
+
         this.feedUrl = {
           kind: feedKind,
-          url: hrefAttr,
+          url: absoluteUrl,
         };
       }
     }
@@ -110,7 +119,7 @@ class FeedLinkParser {
 // Parse an HTML document and extract a syndication feed link from its `<link>` tag.
 const getFeedUrlFromDocument = async (res: Response): Promise<FeedUrl | undefined> => {
   // We prefer Atom feeds to RSS feeds.
-  const feedLinkParser = new FeedLinkParser(["atom", "rss"]);
+  const feedLinkParser = new FeedLinkParser(new URL(res.url), ["atom", "rss"]);
   const rewriter = new HTMLRewriter().on("link", feedLinkParser);
 
   // Even though we're throwing out the result, we must await this to actually parse the response.
