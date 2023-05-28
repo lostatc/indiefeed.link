@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <main>
-        <SyndicationFeed url="https://arstechnica.com" />
+        <SyndicationFeed url="https://theguardian.com" />
       </main>
     </div>
   );

@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { FeedArticle, FeedArticleProps } from "./FeedArticle";
 import { Feed } from "./Feed";
 import { isNotUndefined } from "../types";
+import { htmlToText } from "../text";
 
 const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleProps> => {
   // The author to use if individual entries don't have authors.
@@ -20,13 +21,26 @@ const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleProps> => {
       entry.querySelector("updated")?.textContent ??
       undefined;
 
+    const summaryElement = entry.querySelector("summary") ?? undefined;
+    const rawSummary = summaryElement?.textContent ?? undefined;
+
+    let summary = rawSummary;
+
+    if (summaryElement !== undefined && rawSummary !== undefined) {
+      const summaryType = summaryElement.getAttribute("type");
+
+      if (summaryType === "html" || summaryType === "xhtml") {
+        summary = htmlToText(rawSummary);
+      }
+    }
+
     return {
       url:
         entry.querySelector(`link[rel="alternate"][type="text/html"]`)?.getAttribute("href") ??
         fallbackUrl ??
         undefined,
       title: entry.querySelector("title")?.textContent ?? undefined,
-      subtitle: entry.querySelector("summary")?.textContent ?? undefined,
+      summary,
       categories: Array.from(entry.querySelectorAll("category"))
         .map(
           (category) => category.getAttribute("label") ?? category.getAttribute("term") ?? undefined

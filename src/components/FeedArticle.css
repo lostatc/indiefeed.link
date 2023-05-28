@@ -51,17 +51,17 @@ a.article-body {
   color: var(--color-text-primary-dark);
 }
 
-.article-subtitle {
+.article-summary {
   margin: 0;
   font-weight: var(--font-weight-light);
   font-size: var(--font-size-regular);
 }
 
-[data-scheme="light"] .article-subtitle {
+[data-scheme="light"] .article-summary {
   color: var(--color-text-secondary);
 }
 
-[data-scheme="dark"] .article-subtitle {
+[data-scheme="dark"] .article-summary {
   color: var(--color-text-secondary-dark);
 }
 

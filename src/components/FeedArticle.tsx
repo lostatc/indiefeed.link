@@ -4,7 +4,7 @@ import { BsCalendar2, BsPersonCircle } from "react-icons/bs";
 export interface FeedArticleProps {
   url?: string;
   title?: string;
-  subtitle?: string;
+  summary?: string;
   categories: ReadonlyArray<string>;
   date?: Date;
   authorName?: string;
@@ -22,7 +22,7 @@ const maxCategories = 3;
 export const FeedArticle = ({
   url,
   title,
-  subtitle,
+  summary,
   categories,
   date,
   authorName,
@@ -41,7 +41,7 @@ export const FeedArticle = ({
         )}
         <div className="article-title-wrapper">
           {title && <h2 className="article-title">{title}</h2>}
-          {subtitle && <h3 className="article-subtitle">{subtitle}</h3>}
+          {summary && <h3 className="article-summary">{summary}</h3>}
         </div>
         <footer className="article-detail-list">
           {date && (
