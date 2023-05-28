@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { FeedArticle, FeedArticleProps } from "./FeedArticle";
 import { Feed } from "./Feed";
 import { isNotUndefined } from "../types";
-import { htmlToText } from "../text";
+import { htmlToText, truncateArticleText } from "../text";
 
 const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleProps> => {
   // The author to use if individual entries don't have authors.
@@ -40,7 +40,7 @@ const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleProps> => {
         fallbackUrl ??
         undefined,
       title: entry.querySelector("title")?.textContent ?? undefined,
-      summary,
+      summary: summary === undefined ? undefined : truncateArticleText(summary),
       categories: Array.from(entry.querySelectorAll("category"))
         .map(
           (category) => category.getAttribute("label") ?? category.getAttribute("term") ?? undefined
