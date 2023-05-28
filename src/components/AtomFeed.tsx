@@ -21,7 +21,8 @@ const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleData> => {
       entry.querySelector("updated")?.textContent ??
       undefined;
 
-    const summaryElement = entry.querySelector("summary") ?? undefined;
+    const summaryElement =
+      entry.querySelector("summary") ?? entry.querySelector("content") ?? undefined;
     const rawSummary = summaryElement?.textContent ?? undefined;
 
     let summary = rawSummary;
