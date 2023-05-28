@@ -16,6 +16,9 @@ const dateFormatOptions = {
   day: "numeric",
 } as const;
 
+// The maximum number of categories from the feed that will be displayed in the UI.
+const maxCategories = 3;
+
 export const FeedArticle = ({
   url,
   title,
@@ -30,7 +33,7 @@ export const FeedArticle = ({
         {categories.length > 0 && (
           <header>
             <ul className="article-category-list">
-              {categories.map((categoryLabel) => (
+              {categories.slice(0, maxCategories).map((categoryLabel) => (
                 <li className="article-category">{categoryLabel}</li>
               ))}
             </ul>
