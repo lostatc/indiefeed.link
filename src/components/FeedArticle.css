@@ -70,7 +70,9 @@ ul.article-category-list {
   padding: 0;
   margin: 0;
   display: flex;
-  gap: var(--tag-gap);
+  column-gap: var(--tag-column-gap);
+  row-gap: var(--tag-row-gap);
+  flex-wrap: wrap;
 }
 
 .article-category {
@@ -78,6 +80,9 @@ ul.article-category-list {
   padding: 6px 14px;
   font-size: var(--font-size-small);
   display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 [data-scheme="light"] .article-category {

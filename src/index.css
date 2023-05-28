@@ -47,7 +47,8 @@ body {
   --tag-color-bg: var(--color-accent);
   --tag-color-bg-dark: var(--color-accent);
   --tag-border-radius: 4px;
-  --tag-gap: var(--gap-medium);
+  --tag-column-gap: 16px;
+  --tag-row-gap: 12px;
 }
 
 @font-face {
