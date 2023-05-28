@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { htmlToText, truncateArticleText } from "../text";
+import { htmlToText, truncateArticleSummary } from "../text";
 import { isNotUndefined } from "../types";
 import { Feed } from "./Feed";
 import { FeedArticle, FeedArticleData } from "./FeedArticle";
@@ -21,7 +21,7 @@ const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleData> => {
     return {
       url: entry.querySelector("link")?.textContent ?? fallbackUrl ?? undefined,
       title: entry.querySelector("title")?.textContent ?? undefined,
-      summary: summary === undefined ? undefined : truncateArticleText(summary),
+      summary: summary === undefined ? undefined : truncateArticleSummary(summary),
       categories: Array.from(entry.querySelectorAll("category"))
         .map((category) => category.textContent ?? undefined)
         .filter(isNotUndefined),
