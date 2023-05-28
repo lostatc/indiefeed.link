@@ -1,13 +1,17 @@
 import "./FeedArticle.css";
 import { BsCalendar2, BsPersonCircle } from "react-icons/bs";
 
-export interface FeedArticleProps {
+export interface FeedArticleData {
   url?: string;
   title?: string;
   summary?: string;
   categories: ReadonlyArray<string>;
   date?: Date;
   authorName?: string;
+}
+
+export interface FeedArticleProps extends FeedArticleData {
+  key: string | number;
 }
 
 const dateFormatOptions = {
@@ -20,6 +24,7 @@ const dateFormatOptions = {
 const maxCategories = 3;
 
 export const FeedArticle = ({
+  key,
   url,
   title,
   summary,
@@ -28,13 +33,15 @@ export const FeedArticle = ({
   authorName,
 }: FeedArticleProps) => {
   return (
-    <article className="FeedArticle">
+    <article key={key} className="FeedArticle">
       <a className="article-body" href={url}>
         {categories.length > 0 && (
           <header>
             <ul className="article-category-list">
-              {categories.slice(0, maxCategories).map((categoryLabel) => (
-                <li className="article-category">{categoryLabel}</li>
+              {categories.slice(0, maxCategories).map((categoryLabel, index) => (
+                <li key={index} className="article-category">
+                  {categoryLabel}
+                </li>
               ))}
             </ul>
           </header>

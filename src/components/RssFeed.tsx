@@ -2,9 +2,9 @@ import { useMemo, useState } from "react";
 import { htmlToText, truncateArticleText } from "../text";
 import { isNotUndefined } from "../types";
 import { Feed } from "./Feed";
-import { FeedArticle, FeedArticleProps } from "./FeedArticle";
+import { FeedArticle, FeedArticleData } from "./FeedArticle";
 
-const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleProps> => {
+const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleData> => {
   // The URL to use if individual entries (for some reason) don't have URLs.
   const fallbackUrl = doc.querySelector("rss > channel > link")?.textContent ?? undefined;
 
@@ -32,12 +32,17 @@ const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleProps> => {
 };
 
 export const RssFeed = ({ feedDoc }: { feedDoc: XMLDocument }) => {
-  const [articleProps, setArticleProps] = useState<ReadonlyArray<FeedArticleProps>>();
+  const [articleProps, setArticleProps] = useState<ReadonlyArray<FeedArticleData>>();
 
   useMemo(() => {
     if (feedDoc === undefined) return;
     setArticleProps(parseFeed(feedDoc));
   }, [feedDoc]);
 
-  return <Feed>{articleProps?.map((articleProps) => FeedArticle(articleProps)) ?? []}</Feed>;
+  return (
+    <Feed>
+      {articleProps?.map((articleProps, index) => FeedArticle({ key: index, ...articleProps })) ??
+        []}
+    </Feed>
+  );
 };
