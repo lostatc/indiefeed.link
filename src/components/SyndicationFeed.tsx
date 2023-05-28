@@ -1,96 +1,78 @@
 import { useEffect, useState } from "react";
-import { ContentType, hasOneOfContentTypes, isHtmlPage } from "../contentType";
 import { AtomFeed } from "./AtomFeed";
 import { RssFeed } from "./RssFeed";
+import contentType from "content-type";
+
+// The serverless function will serve syndication feeds with one of these content types.
+export const ContentType = {
+  Atom: "application/atom+xml",
+  Rss: "application/rss+xml",
+  Xml: "application/xml",
+} as const;
 
 type FeedKind = "atom" | "rss";
 
-const contentTypeForFeed = (kind: FeedKind): string => {
-  switch (kind) {
-    case "atom":
-      return ContentType.Atom;
-    case "rss":
-      return ContentType.Rss;
-  }
-};
-
-const getFeedKind = (res: Response): FeedKind | undefined => {
-  if (hasOneOfContentTypes(res, [contentTypeForFeed("atom")])) {
-    return "atom";
-  } else if (hasOneOfContentTypes(res, [contentTypeForFeed("rss")])) {
-    return "rss";
-  } else {
-    return undefined;
-  }
-};
-
-interface FeedUrl {
-  kind: FeedKind;
-  url: string;
-}
-
-const getFeedUrlFromDocument = (doc: Document, kind: FeedKind): FeedUrl | undefined => {
-  const feedLinkElement = doc.querySelector(
-    `html > head > link[rel="alternate"][type="${contentTypeForFeed(kind)}"]`
-  );
-  if (feedLinkElement === null) return undefined;
-
-  const feedUrl = feedLinkElement.getAttribute("href") ?? undefined;
-  if (feedUrl === undefined) return undefined;
-
-  return {
-    kind,
-    url: feedUrl,
-  };
-};
-
-// We prefer Atom feeds to RSS feeds.
-const getBestFeedUrlFromDocument = (doc: Document): FeedUrl | undefined =>
-  getFeedUrlFromDocument(doc, "atom") ?? getFeedUrlFromDocument(doc, "rss");
-
 interface Feed {
   kind: FeedKind;
-  doc: XMLDocument;
+  body: XMLDocument;
 }
 
-const getFeed = async (res: Response): Promise<Feed | undefined> => {
-  const feedKind = getFeedKind(res);
-  if (feedKind !== undefined)
+const probeIsAtomFeed = (feedBody: XMLDocument): boolean => {
+  const feedElement = feedBody.querySelector(`feed:root`);
+  if (feedElement === null) return false;
+
+  return feedElement.namespaceURI === "http://www.w3.org/2005/Atom";
+};
+
+const probeIsRssFeed = (feedBody: XMLDocument): boolean =>
+  feedBody.querySelector("rss:root") !== null;
+
+const fetchFeed = async (url: string): Promise<Feed | undefined> => {
+  // This will return 404 if a syndication feed could not be found at the URL.
+  const res = await fetch(`https://feed.indiefeed.link/${url}`);
+  if (!res.ok) return undefined;
+
+  const feedBody = new DOMParser().parseFromString(await res.text(), ContentType.Xml);
+
+  const contentTypeHeader = res.headers.get("Content-Type");
+  if (contentTypeHeader === null) return undefined;
+
+  const feedContentType = contentType.parse(contentTypeHeader).type;
+
+  // Many websites do not serve their syndication feeds with the correct `Content-Type`. If they do,
+  // then the serverless function will return it with that content type. If they do not, then the
+  // serverless function will return it with a content type of `application/xml`, leaving the client
+  // to infer the kind of feed by probing its contents.
+
+  if (feedContentType === ContentType.Atom || probeIsAtomFeed(feedBody))
     return {
-      kind: feedKind,
-      doc: new DOMParser().parseFromString(await res.text(), ContentType.Xml),
+      kind: "atom",
+      body: feedBody,
     };
 
-  if (!isHtmlPage(res)) return undefined;
+  if (feedContentType === ContentType.Rss || probeIsRssFeed(feedBody))
+    return {
+      kind: "rss",
+      body: feedBody,
+    };
 
-  const htmlDoc = new DOMParser().parseFromString(await res.text(), ContentType.Html);
-
-  const feedUrl = getBestFeedUrlFromDocument(htmlDoc);
-  if (feedUrl === undefined) return undefined;
-
-  const feedRes = await fetch(feedUrl.url);
-
-  return {
-    kind: feedUrl.kind,
-    doc: new DOMParser().parseFromString(await feedRes.text(), ContentType.Xml),
-  };
+  return undefined;
 };
 
 export const SyndicationFeed = ({ url }: { url: string }) => {
   const [feed, setFeed] = useState<Feed>();
 
   useEffect(() => {
-    fetch(url)
-      .then((res) => getFeed(res))
-      .then((rawFeed) => setFeed(rawFeed));
+    fetchFeed(url).then((rawFeed) => setFeed(rawFeed));
   }, [url]);
 
+  // We could not get a syndication feed from this URL.
   if (feed === undefined) return <></>;
 
   switch (feed.kind) {
     case "atom":
-      return <AtomFeed feedDoc={feed.doc} />;
+      return <AtomFeed feedDoc={feed.body} />;
     case "rss":
-      return <RssFeed feedDoc={feed.doc} />;
+      return <RssFeed feedDoc={feed.body} />;
   }
 };

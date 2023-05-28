@@ -200,6 +200,7 @@ const handler = {
       status: 200,
       headers: {
         "Content-Type": feedContentType(feed.kind),
+        "Access-Control-Allow-Origin": "*",
       },
     });
   },
