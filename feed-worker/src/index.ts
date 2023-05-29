@@ -188,13 +188,27 @@ const parseUrl = (url: string): string => {
 
 const handler = {
   async fetch(request: Request): Promise<Response> {
+    if (request.method !== "GET")
+      return new Response(undefined, {
+        status: 405,
+        headers: {
+          Allow: "GET",
+        },
+      });
+
     const url = parseUrl(request.url);
 
     console.log(`Fetching page: ${url}`);
     const res = await fetch(url);
     const feed = await getFeed(res);
 
-    if (feed === undefined) return new Response(undefined, { status: 404 });
+    if (feed === undefined)
+      return new Response(undefined, {
+        status: 404,
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      });
 
     return new Response(feed.body, {
       status: 200,
