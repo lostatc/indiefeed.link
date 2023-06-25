@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { AtomFeed } from "./AtomFeed";
 import { RssFeed } from "./RssFeed";
 import contentType from "content-type";
+import { FeedNotFound } from "./FeedNotFound";
+import { Feed } from "./Feed";
 
 // The serverless function will serve syndication feeds with one of these content types.
 export const ContentType = {
@@ -67,7 +69,7 @@ export const SyndicationFeed = ({ url }: { url: string }) => {
   }, [url]);
 
   // We could not get a syndication feed from this URL.
-  if (feed === undefined) return <></>;
+  if (feed === undefined) return <FeedNotFound url={url} />;
 
   switch (feed.kind) {
     case "atom":
