@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <main>
-        <SyndicationFeed url="https://nytimes.com" />
+        <SyndicationFeed url={window.location.pathname.slice(1)} />
       </main>
     </div>
   );
