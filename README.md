@@ -1,7 +1,6 @@
-# indiefeed.link
+# IndieFeed.link
 
-This site contains the source code for
-[indiefeed.link](https://indiefeed.link).
+This site contains the source code for [indiefeed.link](https://indiefeed.link).
 
 ## Copyright
 
