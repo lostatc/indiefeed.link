@@ -61,20 +61,32 @@ const fetchFeed = async (url: string): Promise<Feed | undefined> => {
   return undefined;
 };
 
+type FeedStatus = { status: "initial" } | { status: "not-found" } | { status: "found"; feed: Feed };
+
 export const SyndicationFeed = ({ url }: { url: string }) => {
-  const [feed, setFeed] = useState<Feed>();
+  const [feed, setFeed] = useState<FeedStatus>({ status: "initial" });
 
   useEffect(() => {
-    fetchFeed(url).then((rawFeed) => setFeed(rawFeed));
+    fetchFeed(url).then((rawFeed) => {
+      if (rawFeed === undefined) {
+        setFeed({ status: "not-found" });
+      } else {
+        setFeed({ status: "found", feed: rawFeed });
+      }
+    });
   }, [url]);
 
-  // We could not get a syndication feed from this URL.
-  if (feed === undefined) return <FeedNotFound url={url} />;
-
-  switch (feed.kind) {
-    case "atom":
-      return <AtomFeed feedDoc={feed.body} />;
-    case "rss":
-      return <RssFeed feedDoc={feed.body} />;
+  switch (feed.status) {
+    case "initial":
+      return <></>;
+    case "not-found":
+      return <FeedNotFound url={url} />;
+    case "found":
+      switch (feed.feed.kind) {
+        case "atom":
+          return <AtomFeed feedDoc={feed.feed.body} />;
+        case "rss":
+          return <RssFeed feedDoc={feed.feed.body} />;
+      }
   }
 };
