@@ -1,0 +1,23 @@
+{
+  "name": "IndieFeed.link",
+  "description": "A landing page for syndication feeds",
+  "start_url": ".",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/favicon-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-2048x2048.png",
+      "sizes": "2048x2048",
+      "type": "image/png"
+    }
+  ]
+}
