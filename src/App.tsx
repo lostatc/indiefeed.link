@@ -23,7 +23,7 @@ function App() {
       errorElement: <RouteErrorPage />,
     },
     {
-      path: "/feed/:url",
+      path: "/feed/*",
       element: <SyndicationFeed />,
       errorElement: <RouteErrorPage />,
     },

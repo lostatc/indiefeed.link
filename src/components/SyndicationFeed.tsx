@@ -64,7 +64,7 @@ const fetchFeed = async (url: string): Promise<Feed | undefined> => {
 type FeedStatus = { status: "initial" } | { status: "not-found" } | { status: "found"; feed: Feed };
 
 export const SyndicationFeed = () => {
-  const { url } = useParams();
+  const { "*": url } = useParams();
 
   const [feed, setFeed] = useState<FeedStatus>({ status: "initial" });
 
