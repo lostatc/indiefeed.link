@@ -3,6 +3,7 @@ import { AtomFeed } from "./AtomFeed";
 import { RssFeed } from "./RssFeed";
 import contentType from "content-type";
 import { ErrorPage } from "./ErrorPage";
+import { useParams } from "react-router-dom";
 
 // The serverless function will serve syndication feeds with one of these content types.
 export const ContentType = {
@@ -62,10 +63,14 @@ const fetchFeed = async (url: string): Promise<Feed | undefined> => {
 
 type FeedStatus = { status: "initial" } | { status: "not-found" } | { status: "found"; feed: Feed };
 
-export const SyndicationFeed = ({ url }: { url: string }) => {
+export const SyndicationFeed = () => {
+  const { url } = useParams();
+
   const [feed, setFeed] = useState<FeedStatus>({ status: "initial" });
 
   useEffect(() => {
+    if (url === undefined) return;
+
     fetchFeed(url).then((rawFeed) => {
       if (rawFeed === undefined) {
         setFeed({ status: "not-found" });
@@ -79,7 +84,7 @@ export const SyndicationFeed = ({ url }: { url: string }) => {
     case "initial":
       return <></>;
     case "not-found":
-      return <ErrorPage title="Could not find feed" subtitle={url} />;
+      return <ErrorPage title="Could not find feed" subtitle={url ?? ""} />;
     case "found":
       switch (feed.feed.kind) {
         case "atom":
