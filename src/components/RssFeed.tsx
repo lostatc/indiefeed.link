@@ -4,13 +4,20 @@ import { isNotUndefined } from "../types";
 import { Feed } from "./Feed";
 import { FeedArticle, FeedArticleData } from "./FeedArticle";
 
-const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleData> => {
+interface FeedContent {
+  title: string;
+  articles: ReadonlyArray<FeedArticleData>;
+}
+
+const parseFeed = (doc: XMLDocument): FeedContent => {
   // The URL to use if individual entries (for some reason) don't have URLs.
   const fallbackUrl = doc.querySelector("rss > channel > link")?.textContent ?? undefined;
 
   const entries = doc.querySelectorAll("rss > channel > item");
 
-  return Array.from(entries).map((entry) => {
+  const title = doc.querySelector("rss > channel > title")?.textContent ?? "Feed";
+
+  const articles = Array.from(entries).map((entry) => {
     const date = entry.querySelector("pubDate")?.textContent ?? undefined;
 
     // The `<description>` could be either HTML or plain text, so we interpret it as HTML and
@@ -29,20 +36,25 @@ const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleData> => {
       authorName: entry.querySelector("author")?.textContent ?? undefined,
     };
   });
+
+  return { title, articles };
 };
 
 export const RssFeed = ({ feedDoc }: { feedDoc: XMLDocument }) => {
-  const [articleProps, setArticleProps] = useState<ReadonlyArray<FeedArticleData>>();
+  const [feedContent, setFeedContent] = useState<FeedContent>();
 
   useMemo(() => {
     if (feedDoc === undefined) return;
-    setArticleProps(parseFeed(feedDoc));
+    setFeedContent(parseFeed(feedDoc));
   }, [feedDoc]);
 
+  if (feedContent === undefined) return <></>;
+
   return (
-    <Feed>
-      {articleProps?.map((articleProps, index) => FeedArticle({ key: index, ...articleProps })) ??
-        []}
+    <Feed title={feedContent?.title}>
+      {feedContent?.articles?.map((articleProps, index) =>
+        FeedArticle({ key: index, ...articleProps })
+      ) ?? []}
     </Feed>
   );
 };

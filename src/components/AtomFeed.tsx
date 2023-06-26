@@ -4,7 +4,12 @@ import { Feed } from "./Feed";
 import { isNotUndefined } from "../types";
 import { htmlToText, truncateArticleSummary } from "../text";
 
-const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleData> => {
+interface FeedContent {
+  title: string;
+  articles: ReadonlyArray<FeedArticleData>;
+}
+
+const parseFeed = (doc: XMLDocument): FeedContent => {
   // The author to use if individual entries don't have authors.
   const fallbackAuthor = doc.querySelector("feed > author > name")?.textContent ?? undefined;
 
@@ -15,7 +20,9 @@ const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleData> => {
 
   const entries = doc.querySelectorAll("feed > entry");
 
-  return Array.from(entries).map((entry) => {
+  const title = doc.querySelector("feed > title")?.textContent ?? "Feed";
+
+  const articles = Array.from(entries).map((entry) => {
     const date =
       entry.querySelector("published")?.textContent ??
       entry.querySelector("updated")?.textContent ??
@@ -51,19 +58,25 @@ const parseFeed = (doc: XMLDocument): ReadonlyArray<FeedArticleData> => {
       authorName: entry.querySelector("author > name")?.textContent ?? fallbackAuthor,
     };
   });
+
+  return { title, articles };
 };
 
 export const AtomFeed = ({ feedDoc }: { feedDoc: XMLDocument }) => {
-  const [articleProps, setArticleProps] = useState<ReadonlyArray<FeedArticleData>>();
+  const [feedContent, setFeedContent] = useState<FeedContent>();
 
   useMemo(() => {
     if (feedDoc === undefined) return;
-    setArticleProps(parseFeed(feedDoc));
+    setFeedContent(parseFeed(feedDoc));
   }, [feedDoc]);
 
+  if (feedContent === undefined) return <></>;
+
   return (
-    <Feed>
-      {articleProps?.map((articleData, index) => FeedArticle({ key: index, ...articleData })) ?? []}
+    <Feed title={feedContent.title}>
+      {feedContent.articles?.map((articleData, index) =>
+        FeedArticle({ key: index, ...articleData })
+      ) ?? []}
     </Feed>
   );
 };
