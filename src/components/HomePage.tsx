@@ -9,10 +9,12 @@ export const HomePage = () => {
       <p className="body text">
         Link to this site to show visitors a preview of your site's RSS or Atom feed.
       </p>
-      <p className="body text"></p>
       <div className="input">
         <FeedUrlInput />
       </div>
+      <p className="body text">
+        <a href="https://github.com/lostatc/indiefeed.link">GitHub</a>
+      </p>
     </main>
   );
 };

@@ -45,6 +45,9 @@ body {
   --input-bg: var(--card-color-bg);
   --input-bg-dark: var(--card-color-bg-dark);
 
+  --link-color: #2eaae4;
+  --link-color-dark: #89cff0;
+
   --tag-color-fg: var(--color-text-primary-dark);
   --tag-color-fg-dark: var(--color-text-primary);
   --tag-color-bg: var(--color-accent);
@@ -95,6 +98,22 @@ body {
     "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+[data-scheme="light"] a {
+  color: var(--link-color);
+}
+
+[data-scheme="light"] a:hover {
+  filter: brightness(75%);
+}
+
+[data-scheme="dark"] a {
+  color: var(--link-color-dark);
+}
+
+[data-scheme="dark"] a:hover {
+  filter: brightness(85%);
 }
 
 [data-scheme="light"] body {
