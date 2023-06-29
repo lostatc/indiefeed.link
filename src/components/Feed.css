@@ -14,6 +14,44 @@
   color: var(--color-text-primary-dark);
 }
 
+.feed-url-block {
+  text-align: center;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
+[data-scheme="light"] .feed-url-block {
+  color: var(--color-text-secondary);
+}
+
+[data-scheme="dark"] .feed-url-block {
+  color: var(--color-text-secondary-dark);
+}
+
+.feed-url {
+  display: flex;
+  gap: var(--gap-small);
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-light);
+}
+
+.feed-url button {
+  all: unset;
+  cursor: pointer;
+}
+
+.feed-url button:hover {
+  filter: brightness(85%);
+}
+
+.copied-text {
+  font-size: 0.9rem;
+}
+
 .feed {
   display: flex;
   flex-direction: column;

@@ -88,9 +88,9 @@ export const SyndicationFeed = () => {
     case "found":
       switch (feed.feed.kind) {
         case "atom":
-          return <AtomFeed feedDoc={feed.feed.body} />;
+          return <AtomFeed feedUrl={url} feedDoc={feed.feed.body} />;
         case "rss":
-          return <RssFeed feedDoc={feed.feed.body} />;
+          return <RssFeed feedUrl={url} feedDoc={feed.feed.body} />;
       }
   }
 };

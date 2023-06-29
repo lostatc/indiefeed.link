@@ -40,7 +40,7 @@ const parseFeed = (doc: XMLDocument): FeedContent => {
   return { title, articles };
 };
 
-export const RssFeed = ({ feedDoc }: { feedDoc: XMLDocument }) => {
+export const RssFeed = ({ feedUrl, feedDoc }: { feedUrl?: string; feedDoc: XMLDocument }) => {
   const [feedContent, setFeedContent] = useState<FeedContent>();
 
   useMemo(() => {
@@ -51,7 +51,7 @@ export const RssFeed = ({ feedDoc }: { feedDoc: XMLDocument }) => {
   if (feedContent === undefined) return <></>;
 
   return (
-    <Feed title={feedContent?.title}>
+    <Feed url={feedUrl} title={feedContent?.title}>
       {feedContent?.articles?.map((articleProps, index) =>
         FeedArticle({ key: index, ...articleProps })
       ) ?? []}

@@ -62,7 +62,7 @@ const parseFeed = (doc: XMLDocument): FeedContent => {
   return { title, articles };
 };
 
-export const AtomFeed = ({ feedDoc }: { feedDoc: XMLDocument }) => {
+export const AtomFeed = ({ feedUrl, feedDoc }: { feedUrl?: string; feedDoc: XMLDocument }) => {
   const [feedContent, setFeedContent] = useState<FeedContent>();
 
   useMemo(() => {
@@ -73,7 +73,7 @@ export const AtomFeed = ({ feedDoc }: { feedDoc: XMLDocument }) => {
   if (feedContent === undefined) return <></>;
 
   return (
-    <Feed title={feedContent.title}>
+    <Feed url={feedUrl} title={feedContent.title}>
       {feedContent.articles?.map((articleData, index) =>
         FeedArticle({ key: index, ...articleData })
       ) ?? []}
