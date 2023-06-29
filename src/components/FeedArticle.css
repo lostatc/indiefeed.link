@@ -31,6 +31,14 @@ a.article-body {
   color: inherit;
 }
 
+[data-scheme="light"] a.article-body:hover {
+  filter: brightness(95%);
+}
+
+[data-scheme="dark"] a.article-body:hover {
+  filter: brightness(90%);
+}
+
 .article-title-wrapper {
   display: flex;
   flex-direction: column;
