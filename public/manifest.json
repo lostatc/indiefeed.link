@@ -1,5 +1,6 @@
 {
   "name": "IndieFeed.link",
+  "short_name": "IndieFeed",
   "description": "A landing page for syndication feeds",
   "start_url": ".",
   "display": "standalone",
