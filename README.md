@@ -1,6 +1,22 @@
 # IndieFeed.link
 
-This site contains the source code for [indiefeed.link](https://indiefeed.link).
+This is a website that acts as a landing page for your blog's syndication feed
+(RSS or Atom).
+
+Many blogs will include a link to their feed somewhere on the page to advertise
+that they have one, but clicking these links brings users to an ugly XML
+document that they might not know what to do with.
+
+As an alternative, you can link to this site instead:
+
+```
+https://indiefeed.link/feed/<your_feed_url>
+```
+
+Users are brought to a page that shows a preview of the articles from your feed
+and allows them to easily copy the feed URL into their RSS reader. Much nicer.
+
+[See an example here!](https://indiefeed.link/feed/https://nytimes.com)
 
 ## Copyright
 
