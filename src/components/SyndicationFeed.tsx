@@ -84,7 +84,13 @@ export const SyndicationFeed = () => {
     case "initial":
       return <></>;
     case "not-found":
-      return <ErrorPage title="Could not find feed" subtitle={url ?? ""} />;
+      return (
+        <ErrorPage
+          title="Could not find feed"
+          subtitle={url ?? ""}
+          link={{ name: "Click here to go back", url: "/" }}
+        />
+      );
     case "found":
       switch (feed.feed.kind) {
         case "atom":

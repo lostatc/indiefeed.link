@@ -1,11 +1,25 @@
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 import "./ErrorPage.css";
 
-export const ErrorPage = ({ title, subtitle }: { title: string; subtitle: string }) => {
+export interface ErrorPageLink {
+  name: string;
+  url: string;
+}
+
+export const ErrorPage = ({
+  title,
+  subtitle,
+  link,
+}: {
+  title: string;
+  subtitle: string;
+  link?: ErrorPageLink;
+}) => {
   return (
     <section className="error-page">
       <h1 className="title">{title}</h1>
       <p className="subtitle">{subtitle}</p>
+      {link && <a href={link.url}>{link.name}</a>}
     </section>
   );
 };
