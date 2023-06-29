@@ -1,0 +1,18 @@
+import { FeedUrlInput } from "./FeedUrlInput";
+import "./HomePage.css";
+
+export const HomePage = () => {
+  return (
+    <main className="home">
+      <h1 className="title text">IndieFeed.link</h1>
+      <p className="body text">A landing page for your syndication feed.</p>
+      <p className="body text">
+        Link to this site to show visitors a preview of your site's RSS or Atom feed.
+      </p>
+      <p className="body text"></p>
+      <div className="input">
+        <FeedUrlInput />
+      </div>
+    </main>
+  );
+};

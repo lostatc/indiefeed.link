@@ -1,0 +1,23 @@
+#feed-url-form {
+  position: relative;
+}
+
+#feed-url-label {
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-bold);
+  position: absolute;
+  top: 10px;
+  inset-inline-start: 20px;
+}
+
+[data-scheme="light"] #feed-url-label {
+  color: var(--color-text-secondary);
+}
+
+[data-scheme="dark"] #feed-url-label {
+  color: var(--color-text-secondary-dark);
+}
+
+#feed-url-input {
+  padding: 30px 20px 15px;
+}

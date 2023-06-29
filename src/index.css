@@ -42,6 +42,9 @@ body {
   --card-gap: 34px;
   --card-gap-tight: 26px;
 
+  --input-bg: var(--card-color-bg);
+  --input-bg-dark: var(--card-color-bg-dark);
+
   --tag-color-fg: var(--color-text-primary-dark);
   --tag-color-fg-dark: var(--color-text-primary);
   --tag-color-bg: var(--color-accent);

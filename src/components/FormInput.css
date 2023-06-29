@@ -1,0 +1,37 @@
+input.form-control {
+  border: 1px solid transparent;
+}
+
+[data-scheme="light"] input {
+  color: var(--color-text-primary);
+  background: var(--input-bg);
+}
+
+[data-scheme="dark"] input {
+  color: var(--color-text-primary-dark);
+  background: var(--input-bg-dark);
+}
+
+input.form-control:focus {
+  box-shadow: unset;
+}
+
+[data-scheme="light"] input:focus {
+  color: var(--color-text-primary);
+  background: var(--input-bg);
+  border: 1px solid var(--color-accent);
+}
+
+[data-scheme="dark"] input:focus {
+  color: var(--color-text-primary-dark);
+  background: var(--input-bg-dark);
+  border: 1px solid var(--color-accent-dark);
+}
+
+[data-scheme="light"] input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+[data-scheme="dark"] input::placeholder {
+  color: var(--color-text-tertiary-dark);
+}

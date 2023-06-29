@@ -1,0 +1,33 @@
+.text {
+  text-align: center;
+}
+
+[data-scheme="light"] .text {
+  color: var(--color-text-primary);
+}
+
+[data-scheme="dark"] .text {
+  color: var(--color-text-primary-dark);
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-black);
+  margin-bottom: 1.2rem;
+}
+
+.body {
+  font-size: 1.2rem;
+  font-weight: var(--font-weight-light);
+}
+
+.home {
+  margin: 4rem 2rem;
+}
+
+.input {
+  max-width: 38rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+}

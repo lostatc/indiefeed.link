@@ -2,6 +2,7 @@ import { StrictMode, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { RouteErrorPage } from "./components/ErrorPage";
+import { HomePage } from "./components/HomePage";
 import { SyndicationFeed } from "./components/SyndicationFeed";
 
 const setColorScheme = (isDark: boolean) => {
@@ -19,7 +20,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <></>,
+      element: <HomePage />,
       errorElement: <RouteErrorPage />,
     },
     {
