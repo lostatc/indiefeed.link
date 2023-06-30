@@ -31,7 +31,7 @@ export const Feed = ({
       <h1 className="feed-name">{title}</h1>
       {url && (
         <section className="feed-url-block">
-          <div>Copy this URL into your RSS reader</div>
+          <div>Copy this URL into your feed reader</div>
           <div className="feed-url">
             {url}
             <button onClick={copyUrl}>
