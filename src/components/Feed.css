@@ -48,10 +48,6 @@
   filter: brightness(85%);
 }
 
-.copied-text {
-  font-size: 0.9rem;
-}
-
 .feed {
   display: flex;
   flex-direction: column;
