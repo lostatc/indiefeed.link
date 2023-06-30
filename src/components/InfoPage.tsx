@@ -6,10 +6,10 @@ export const InfoPage = () => {
     <main className="info">
       <div>
         <h1 className="title">About web feeds</h1>
-        <h2 className="subtitle">
+        <p className="subtitle">
           Web feeds let you subscribe to news sites, podcasts, and more and get the latest updates
           in your feed reader.
-        </h2>
+        </p>
         <div className="home-link">
           <BsArrowReturnLeft aria-hidden />
           <a href="/">Site home</a>

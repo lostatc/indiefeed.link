@@ -48,7 +48,7 @@ export const FeedArticle = ({
         )}
         <div className="article-title-wrapper">
           {title && <h2 className="article-title">{title}</h2>}
-          {summary && <h3 className="article-summary">{summary}</h3>}
+          {summary && <p className="article-summary">{summary}</p>}
         </div>
         <footer className="article-detail-list">
           {date && (
