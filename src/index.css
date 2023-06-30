@@ -52,7 +52,7 @@ body {
   --tag-color-fg-dark: var(--color-text-primary);
   --tag-color-bg: var(--color-accent);
   --tag-color-bg-dark: var(--color-accent-dark);
-  --tag-border-radius: 4px;
+  --tag-border-radius: 14px;
   --tag-column-gap: 16px;
   --tag-row-gap: 12px;
 }
