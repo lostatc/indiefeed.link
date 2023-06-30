@@ -15,6 +15,18 @@ const AcceptableContentTypes = {
   Xml: ["application/xml", "text/xml"],
 } as const;
 
+const corsAllowedOrigins = ["https://indiefeed.link", "http://localhost:3000"];
+
+const getCorsHeaders = (req: Request): Record<string, string> => {
+  const reqOrigin = req.headers.get("Origin");
+
+  if (reqOrigin !== null && corsAllowedOrigins.includes(reqOrigin)) {
+    return { "Access-Control-Allow-Origin": reqOrigin };
+  }
+
+  return {};
+};
+
 // We have a separate `xml` type for cases where the origin server does not make it clear enough
 // whether the feed is an Atom or RSS feed. For this case, the client will need to probe the actual
 // payload to infer which kind of feed it is.
@@ -206,7 +218,7 @@ const handler = {
       return new Response(undefined, {
         status: 404,
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          ...getCorsHeaders(request),
         },
       });
 
@@ -214,7 +226,7 @@ const handler = {
       status: 200,
       headers: {
         "Content-Type": feedContentType(feed.kind),
-        "Access-Control-Allow-Origin": "*",
+        ...getCorsHeaders(request),
       },
     });
   },
