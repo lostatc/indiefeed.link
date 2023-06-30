@@ -1,3 +1,4 @@
+import { BsArrowReturnLeft } from "react-icons/bs";
 import "./InfoPage.css";
 
 export const InfoPage = () => {
@@ -9,6 +10,10 @@ export const InfoPage = () => {
           Web feeds let you subscribe to news sites, podcasts, and more and get the latest updates
           in your feed reader.
         </h2>
+        <div className="home-link">
+          <BsArrowReturnLeft aria-hidden />
+          <a href="/">Site home</a>
+        </div>
       </div>
       <ul className="resource-list">
         <li>

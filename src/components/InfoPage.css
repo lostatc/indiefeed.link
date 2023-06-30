@@ -31,3 +31,10 @@
 .resource-list > li > a {
   font-weight: var(--font-weight-bold);
 }
+
+.home-link {
+  display: flex;
+  gap: var(--gap-small);
+  justify-content: center;
+  align-items: center;
+}
