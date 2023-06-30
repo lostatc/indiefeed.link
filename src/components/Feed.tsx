@@ -1,7 +1,7 @@
 import { FeedArticleData } from "./FeedArticle";
 import "./Feed.css";
 import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { BsClipboard, BsClipboardCheck, BsInfoCircle } from "react-icons/bs";
+import { BsClipboard, BsClipboardCheck } from "react-icons/bs";
 import { Tooltip } from "bootstrap";
 import { FeedInfoLink } from "./FeedInfoLink";
 
@@ -55,7 +55,7 @@ export const Feed = ({
   }, [copied, tooltip]);
 
   return (
-    <>
+    <main>
       <h1 className="feed-name">{title}</h1>
       {url && (
         <section className="feed-details">
@@ -82,6 +82,6 @@ export const Feed = ({
         </section>
       )}
       <section className="feed">{children}</section>
-    </>
+    </main>
   );
 };
