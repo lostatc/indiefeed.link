@@ -14,7 +14,7 @@
   color: var(--color-text-primary-dark);
 }
 
-.feed-url-block {
+.feed-details {
   text-align: center;
   margin-top: 2rem;
   display: flex;
@@ -22,11 +22,11 @@
   gap: var(--gap-small);
 }
 
-[data-scheme="light"] .feed-url-block {
+[data-scheme="light"] .feed-detail {
   color: var(--color-text-secondary);
 }
 
-[data-scheme="dark"] .feed-url-block {
+[data-scheme="dark"] .feed-details {
   color: var(--color-text-secondary-dark);
 }
 

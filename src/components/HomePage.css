@@ -11,13 +11,13 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: var(--font-size-page-title);
   font-weight: var(--font-weight-black);
   margin-bottom: 1.2rem;
 }
 
 .body {
-  font-size: 1.2rem;
+  font-size: var(--font-size-subtitle);
   font-weight: var(--font-weight-light);
 }
 
@@ -26,6 +26,6 @@
 }
 
 .input {
-  max-width: 38rem;
+  max-width: var(--page-width-small);
   margin: 2rem auto;
 }

@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import { RouteErrorPage } from "./components/ErrorPage";
 import { HomePage } from "./components/HomePage";
+import { InfoPage } from "./components/InfoPage";
 import { SyndicationFeed } from "./components/SyndicationFeed";
 
 const setColorScheme = (isDark: boolean) => {
@@ -26,6 +27,11 @@ function App() {
     {
       path: "/feed/*",
       element: <SyndicationFeed />,
+      errorElement: <RouteErrorPage />,
+    },
+    {
+      path: "/info/",
+      element: <InfoPage />,
       errorElement: <RouteErrorPage />,
     },
   ]);

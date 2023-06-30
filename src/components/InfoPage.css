@@ -1,0 +1,33 @@
+.info {
+  padding: 4rem 2rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--gap-large);
+  max-width: var(--page-width-small);
+}
+
+[data-scheme="light"] .info {
+  color: var(--color-text-primary);
+}
+
+[data-scheme="dark"] .info {
+  color: var(--color-text-primary-dark);
+}
+
+.title {
+  font-weight: var(--font-weight-black);
+  font-size: var(--font-size-page-title);
+  text-align: center;
+}
+
+.subtitle {
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-subtitle);
+  text-align: center;
+}
+
+.resource-list > li > a {
+  font-weight: var(--font-weight-bold);
+}

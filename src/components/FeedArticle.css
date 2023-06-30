@@ -1,5 +1,5 @@
 .FeedArticle {
-  max-width: 60rem;
+  max-width: var(--page-width-normal);
   width: 100%;
 }
 
@@ -48,7 +48,7 @@ a.article-body {
 .article-title {
   margin: 0;
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-title);
+  font-size: var(--font-size-article-title);
 }
 
 [data-scheme="light"] .article-title {

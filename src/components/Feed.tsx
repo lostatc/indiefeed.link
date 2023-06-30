@@ -1,8 +1,9 @@
 import { FeedArticleData } from "./FeedArticle";
 import "./Feed.css";
 import { ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { BsClipboard, BsClipboardCheck } from "react-icons/bs";
+import { BsClipboard, BsClipboardCheck, BsInfoCircle } from "react-icons/bs";
 import { Tooltip } from "bootstrap";
+import { FeedInfoLink } from "./FeedInfoLink";
 
 export const Feed = ({
   title,
@@ -57,7 +58,7 @@ export const Feed = ({
     <>
       <h1 className="feed-name">{title}</h1>
       {url && (
-        <section className="feed-url-block">
+        <section className="feed-details">
           <div>Copy this URL into your feed reader</div>
           <div className="feed-url">
             {url}
@@ -77,6 +78,7 @@ export const Feed = ({
               </span>
             </button>
           </div>
+          <FeedInfoLink />
         </section>
       )}
       <section className="feed">{children}</section>

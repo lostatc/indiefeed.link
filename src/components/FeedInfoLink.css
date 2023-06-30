@@ -1,0 +1,15 @@
+.info-link {
+  display: flex;
+  gap: var(--gap-small);
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-regular);
+}
+
+[data-scheme="light"] .info-link {
+  color: var(--color-text-primary);
+}
+
+[data-scheme="dark"] .info-link {
+  color: var(--color-text-primary-dark);
+}

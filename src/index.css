@@ -27,10 +27,16 @@ body {
 
   --font-size-small: 0.8rem;
   --font-size-regular: 1rem;
-  --font-size-title: 1.3rem;
+  --font-size-page-title: 2rem;
+  --font-size-subtitle: 1.2rem;
+  --font-size-article-title: 1.3rem;
 
   --gap-small: 8px;
   --gap-medium: 16px;
+  --gap-large: 24px;
+
+  --page-width-small: 40rem;
+  --page-width-normal: 60rem;
 
   --card-color-bg: #fff;
   --card-color-bg-dark: #424242;

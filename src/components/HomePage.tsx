@@ -1,3 +1,4 @@
+import { FeedInfoLink } from "./FeedInfoLink";
 import { FeedUrlInput } from "./FeedUrlInput";
 import "./HomePage.css";
 
@@ -9,6 +10,7 @@ export const HomePage = () => {
       <p className="body text">
         Link to this site to show visitors a preview of your site's RSS or Atom feed.
       </p>
+      <FeedInfoLink />
       <div className="input">
         <FeedUrlInput />
       </div>
