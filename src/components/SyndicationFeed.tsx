@@ -88,7 +88,7 @@ export const SyndicationFeed = () => {
         <ErrorPage
           title="Could not find feed"
           subtitle={url ?? ""}
-          link={{ name: "Click here to go back", url: "/" }}
+          link={{ text: "Go back", href: "/" }}
         />
       );
     case "found":

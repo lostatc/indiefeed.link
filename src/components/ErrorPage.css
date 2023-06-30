@@ -10,9 +10,9 @@
 }
 
 .error-page .title {
-  font-size: 2.6rem;
+  font-size: var(--font-size-page-title);
   font-weight: var(--font-weight-bold);
-  margin-bottom: 0.8rem;
+  margin-bottom: var(--gap-medium);
 }
 
 [data-scheme="light"] .error-page .title {
@@ -24,9 +24,8 @@
 }
 
 .error-page .subtitle {
-  font-size: 1.8rem;
+  font-size: var(--font-size-subtitle);
   font-weight: var(--font-weight-light);
-  margin-top: 0.8rem;
 }
 
 [data-scheme="light"] .error-page .subtitle {
