@@ -51,7 +51,7 @@ body {
   --input-bg: var(--card-color-bg);
   --input-bg-dark: var(--card-color-bg-dark);
 
-  --link-color: #2eaae4;
+  --link-color: #198fc5;
   --link-color-dark: #89cff0;
 
   --tag-color-fg: var(--color-text-primary-dark);
