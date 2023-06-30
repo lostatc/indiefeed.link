@@ -1,3 +1,4 @@
+import { BsGithub } from "react-icons/bs";
 import { FeedInfoLink } from "./FeedInfoLink";
 import { FeedUrlInput } from "./FeedUrlInput";
 import "./HomePage.css";
@@ -14,7 +15,8 @@ export const HomePage = () => {
       <div className="input">
         <FeedUrlInput />
       </div>
-      <p className="body text">
+      <p className="text github-link">
+        <BsGithub aria-hidden />
         <a href="https://github.com/lostatc/indiefeed.link">GitHub</a>
       </p>
     </main>

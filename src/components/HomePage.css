@@ -29,3 +29,10 @@
   max-width: var(--page-width-small);
   margin: 2rem auto;
 }
+
+.github-link {
+  display: flex;
+  gap: var(--gap-small);
+  justify-content: center;
+  align-items: center;
+}
