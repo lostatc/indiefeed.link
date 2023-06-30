@@ -1,7 +1,7 @@
 # IndieFeed.link
 
-This is a website that acts as a landing page for your blog's syndication feed
-(RSS or Atom).
+This is a website that acts as a landing page for your blog's feed (RSS or
+Atom).
 
 Many blogs will include a link to their feed somewhere on the page to advertise
 that they have one, but clicking these links brings users to an ugly XML
