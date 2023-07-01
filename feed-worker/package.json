@@ -2,7 +2,7 @@
   "name": "indiefeed-fetcher-worker",
   "version": "0.1.0",
   "private": true,
-  "description": "A serverless function for fetching syndication feeds",
+  "description": "A serverless function for fetching web feeds",
   "homepage": "https://github.com/lostatc/indiefeed.link#readme",
   "bugs": {
     "url": "https://github.com/lostatc/indiefeed.link/issues"

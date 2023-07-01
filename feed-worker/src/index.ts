@@ -32,7 +32,7 @@ const getCorsHeaders = (req: Request): Record<string, string> => {
 // payload to infer which kind of feed it is.
 type FeedKind = "atom" | "rss" | "xml";
 
-// Return the preferred content type for a given type of syndication feed.
+// Return the preferred content type for a given type of feed.
 const feedContentType = (kind: FeedKind): string => {
   switch (kind) {
     case "atom":
@@ -44,8 +44,8 @@ const feedContentType = (kind: FeedKind): string => {
   }
 };
 
-// Return a list of acceptable content types for a given type of syndication feed. These are content
-// types that we look for when identifying if a page is a syndication feed.
+// Return a list of acceptable content types for a given type of feed. These are content types that
+// we look for when identifying if a page is a web feed.
 const acceptableFeedContentTypes = (kind: FeedKind): ReadonlyArray<string> => {
   switch (kind) {
     case "atom":
@@ -66,7 +66,7 @@ const hasContentType = (res: Response, contentTypes: ReadonlyArray<string>): boo
   return contentTypes.includes(parsedContentType);
 };
 
-// Infer the kind of syndication feed that is in the body of the given response object based on its
+// Infer the kind of feed that is in the body of the given response object based on its
 // `Content-Type` header.
 const inferFeedKind = (res: Response): FeedKind | undefined => {
   if (hasContentType(res, AcceptableContentTypes.Atom)) {
@@ -97,7 +97,7 @@ class FeedLinkParser {
   }
 
   element(element: Element) {
-    // We stop on the first syndication feed we find.
+    // We stop on the first feed we find.
     if (this.feedUrl !== undefined) return;
 
     const relAttr = decodeHtml(element.getAttribute("rel"));
@@ -128,7 +128,7 @@ class FeedLinkParser {
   }
 }
 
-// Parse an HTML document and extract a syndication feed link from its `<link>` tag.
+// Parse an HTML document and extract a feed link from its `<link>` tag.
 const getFeedUrlFromDocument = async (res: Response): Promise<FeedUrl | undefined> => {
   // We prefer Atom feeds to RSS feeds.
   const feedLinkParser = new FeedLinkParser(new URL(res.url), ["atom", "rss"]);
@@ -148,8 +148,8 @@ interface Feed {
   body: string;
 }
 
-// Get a syndication feed from a response object, either of the feed itself or of a web page that
-// links to it in the HTML header.
+// Get a feed from a response object, either of the feed itself or of a web page that links to it in
+// the HTML header.
 const getFeed = async (res: Response): Promise<Feed | undefined> => {
   const maybeFeedKind = inferFeedKind(res);
   if (maybeFeedKind !== undefined) {
@@ -162,17 +162,17 @@ const getFeed = async (res: Response): Promise<Feed | undefined> => {
   }
 
   if (!hasContentType(res, [ContentType.Html])) {
-    console.log("URL is not a syndication feed or an HTML document!");
+    console.log("URL is not a web feed or an HTML document!");
     return undefined;
   }
 
   const feedUrl = await getFeedUrlFromDocument(res);
   if (feedUrl === undefined) {
-    console.log("HTML document did not contain a link to a syndication feed.");
+    console.log("HTML document did not contain a link to a web feed.");
     return undefined;
   }
 
-  console.log(`Fetching syndication feed: ${feedUrl.url}`);
+  console.log(`Fetching web feed: ${feedUrl.url}`);
   const feedRes = await fetch(feedUrl.url);
 
   // We ignore the media type in the `<link>` because it sometimes lies about whether the feed is an
@@ -181,7 +181,7 @@ const getFeed = async (res: Response): Promise<Feed | undefined> => {
   // probe the contents to infer which kind of feed it is.
   const feedKind = inferFeedKind(feedRes);
   if (feedKind === undefined) {
-    console.log("Syndication feed has an unrecognized content type.");
+    console.log("Web feed has an unrecognized content type.");
     return undefined;
   }
 

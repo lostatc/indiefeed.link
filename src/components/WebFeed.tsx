@@ -5,7 +5,7 @@ import contentType from "content-type";
 import { ErrorPage } from "./ErrorPage";
 import { useParams } from "react-router-dom";
 
-// The serverless function will serve syndication feeds with one of these content types.
+// The serverless function will serve feeds with one of these content types.
 export const ContentType = {
   Atom: "application/atom+xml",
   Rss: "application/rss+xml",
@@ -30,7 +30,7 @@ const probeIsRssFeed = (feedBody: XMLDocument): boolean =>
   feedBody.querySelector("rss:root") !== null;
 
 const fetchFeed = async (url: string): Promise<Feed | undefined> => {
-  // This will return 404 if a syndication feed could not be found at the URL.
+  // This will return 404 if a feed could not be found at the URL.
   const res = await fetch(`https://feed.indiefeed.link/${url}`);
   if (!res.ok) return undefined;
 
@@ -41,10 +41,10 @@ const fetchFeed = async (url: string): Promise<Feed | undefined> => {
 
   const feedContentType = contentType.parse(contentTypeHeader).type;
 
-  // Many websites do not serve their syndication feeds with the correct `Content-Type`. If they do,
-  // then the serverless function will return it with that content type. If they do not, then the
-  // serverless function will return it with a content type of `application/xml`, leaving the client
-  // to infer the kind of feed by probing its contents.
+  // Many websites do not serve their feeds with the correct `Content-Type`. If they do, then the
+  // serverless function will return it with that content type. If they do not, then the serverless
+  // function will return it with a content type of `application/xml`, leaving the client to infer
+  // the kind of feed by probing its contents.
 
   if (feedContentType === ContentType.Atom || probeIsAtomFeed(feedBody))
     return {
@@ -63,7 +63,7 @@ const fetchFeed = async (url: string): Promise<Feed | undefined> => {
 
 type FeedStatus = { status: "initial" } | { status: "not-found" } | { status: "found"; feed: Feed };
 
-export const SyndicationFeed = () => {
+export const WebFeed = () => {
   const { "*": url } = useParams();
 
   const [feed, setFeed] = useState<FeedStatus>({ status: "initial" });

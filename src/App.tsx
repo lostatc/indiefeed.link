@@ -4,7 +4,7 @@ import "./App.css";
 import { RouteErrorPage } from "./components/ErrorPage";
 import { HomePage } from "./components/HomePage";
 import { InfoPage } from "./components/InfoPage";
-import { SyndicationFeed } from "./components/SyndicationFeed";
+import { WebFeed } from "./components/WebFeed";
 
 const setColorScheme = (isDark: boolean) => {
   const colorScheme = isDark ? "dark" : "light";
@@ -26,7 +26,7 @@ function App() {
     },
     {
       path: "/feed/*",
-      element: <SyndicationFeed />,
+      element: <WebFeed />,
       errorElement: <RouteErrorPage />,
     },
     {
