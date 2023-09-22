@@ -14,12 +14,18 @@
   color: var(--color-text-primary-dark);
 }
 
+.feed-url-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+}
+
 .feed-details {
   text-align: center;
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  gap: var(--gap-small);
+  gap: var(--gap-medium);
 }
 
 [data-scheme="light"] .feed-detail {

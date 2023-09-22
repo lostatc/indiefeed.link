@@ -59,24 +59,26 @@ export const Feed = ({
       <h1 className="feed-name">{title}</h1>
       {url && (
         <section className="feed-details">
-          <div>Copy this URL into your feed reader</div>
-          <div className="feed-url">
-            {url}
-            <button
-              onClick={copyUrl}
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="Copy"
-              aria-label="Copy"
-              ref={copyButtonRef}
-            >
-              <span hidden={copied}>
-                <BsClipboard aria-hidden />
-              </span>
-              <span hidden={!copied}>
-                <BsClipboardCheck aria-hidden />
-              </span>
-            </button>
+          <div className="feed-url-section">
+            <div>Copy this URL into your feed reader</div>
+            <div className="feed-url">
+              {url}
+              <button
+                onClick={copyUrl}
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                title="Copy"
+                aria-label="Copy"
+                ref={copyButtonRef}
+              >
+                <span hidden={copied}>
+                  <BsClipboard aria-hidden />
+                </span>
+                <span hidden={!copied}>
+                  <BsClipboardCheck aria-hidden />
+                </span>
+              </button>
+            </div>
           </div>
           <FeedInfoLink />
         </section>
