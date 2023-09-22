@@ -25,7 +25,7 @@ body {
   --font-weight-bold: 700;
   --font-weight-black: 900;
 
-  --font-size-small: 0.8rem;
+  --font-size-small: 0.7rem;
   --font-size-regular: 1rem;
   --font-size-page-title: 2rem;
   --font-size-subtitle: 1.2rem;
@@ -43,7 +43,7 @@ body {
   --card-border-radius: 10px;
   --card-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06),
     0px 0px 1px rgba(0, 0, 0, 0.04);
-  --card-padding: 30px;
+  --card-padding: 26px;
   --card-padding-tight: 22px;
   --card-gap: 34px;
   --card-gap-tight: 26px;

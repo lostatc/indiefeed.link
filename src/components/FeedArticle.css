@@ -126,4 +126,7 @@ ul.article-category-list {
 
 .article-detail .article-detail-text {
   font-size: var(--font-size-small);
+
+  /* We need this adjustment to make the text align with the icon. */
+  margin-top: 0.2rem;
 }
