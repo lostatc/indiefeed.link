@@ -66,7 +66,7 @@ export const Feed = ({
               <button
                 onClick={copyUrl}
                 data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
+                data-bs-placement="top"
                 title="Copy"
                 aria-label="Copy"
                 ref={copyButtonRef}
