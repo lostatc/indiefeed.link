@@ -17,7 +17,6 @@
   padding: var(--card-padding);
   display: flex;
   flex-direction: column;
-  gap: var(--gap-medium);
 }
 
 @media (max-width: 576px) {
@@ -77,10 +76,18 @@ ul.article-category-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  margin-bottom: var(--gap-medium);
   display: flex;
   column-gap: var(--tag-column-gap);
   row-gap: var(--tag-row-gap);
   flex-wrap: wrap;
+}
+
+/* Don't show the category list on small screens. It takes up too much space. */
+@media (max-width: 576px) {
+  ul.article-category-list {
+    display: none;
+  }
 }
 
 .article-category {
@@ -105,6 +112,7 @@ ul.article-category-list {
 
 .article-detail-list {
   display: flex;
+  margin-top: var(--gap-medium);
   align-items: center;
   gap: var(--gap-medium);
   flex-wrap: wrap;
