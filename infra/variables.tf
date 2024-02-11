@@ -1,10 +1,10 @@
 variable "cloudflare_api_token" {
-  type = string
+  type        = string
   description = "Cloudflare API token"
-  sensitive = true
+  sensitive   = true
 }
 
 variable "cloudflare_account_id" {
-  type = string
+  type        = string
   description = "Cloudflare account ID"
 }
