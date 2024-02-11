@@ -21,7 +21,7 @@ the feed URL into their feed reader. Much nicer.
 
 ## Copyright
 
-Copyright © 2023 Wren Powell
+Copyright © 2023-2024 Wren Powell
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
