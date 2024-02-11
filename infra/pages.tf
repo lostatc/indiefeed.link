@@ -5,7 +5,7 @@ resource "cloudflare_pages_project" "indiefeed" {
 
   build_config {
     build_command   = "npm install && npm run build"
-    destination_dir = "build"
+    destination_dir = "dist"
   }
 
   source {

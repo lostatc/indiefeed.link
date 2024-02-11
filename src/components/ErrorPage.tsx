@@ -38,7 +38,7 @@ export const RouteErrorPage = () => {
       subtitle = "There is nothing here";
       link = { text: "Site home", href: "/" };
     } else {
-      subtitle = error.error?.message || error.statusText;
+      subtitle = error.statusText;
     }
   } else if (error instanceof Error) {
     subtitle = error.message;
